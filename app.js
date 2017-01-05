@@ -1,4 +1,5 @@
 ﻿var express = require('express');
+var path = require('path');
 
 var app = express();
 
@@ -7,6 +8,10 @@ var routes = require('./routes/index');
 app.use('/', routes);
 
 app.set('port', process.env.PORT || 9080);
+
+if (process.argv[2] == 'dev') {
+    app.use(express.static(path.join(__dirname)));
+}
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jsx');
